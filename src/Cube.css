@@ -1,0 +1,70 @@
+.square-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  height: 50vh; 
+  gap: 20px;
+}
+
+.square-item {
+  position: relative; /* Ensure z-index works properly */
+  width: 300px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #f6f6f6;
+  box-shadow: 0 0 10px rgb(221, 108, 108);
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.2s ease;
+  filter: brightness(0.7); /* Lower brightness initially */
+}
+
+.square-item:hover {
+  transform: scale(1.07); /* Scale up on hover */
+  filter: brightness(1); /* Restore brightness on hover */
+}
+
+.square-item::before {
+  content: ''; /* Pseudo-element to overlay background image */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.7); /* Lower brightness for background image */
+  transition: transform 0.2s ease, filter 0.2s ease;
+  z-index: -1; /* Behind the content */
+}
+
+.constituencies {
+  background-color: rgb(215, 72, 72);
+  color: rgb(255, 255, 255);
+}
+
+.candidates {
+  background-image: url('./Assets/bg3.png');
+  color: rgb(255, 255, 255);
+}
+
+.voter-registration {
+  background-color: rgb(215, 72, 72); /* Medium sea green */
+  color: white;
+}
+
+.election-updates {
+  background-color: rgb(215, 72, 72);
+  color: white;
+}
+
+.loksabha2024 {
+  background-color: rgb(215, 72, 72);
+  color: white;
+}
