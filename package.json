@@ -7,6 +7,7 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "antd": "^5.18.3",
     "axios": "^1.7.2",
     "body-parser": "^1.20.2",
     "dotenv": "^16.4.5",
@@ -20,6 +21,8 @@
     "recharts": "^2.12.7",
     "require": "^2.4.20",
     "styled-components": "^6.1.11",
+    "swal": "^0.1.0",
+    "sweetalert2": "^11.12.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

@@ -131,6 +131,22 @@ body {
     z-index: 1000;
     
   }
+
+  /* #chat-container {
+    position: relative;
+    width: 400px;
+    margin: auto;
+    border: 1px solid #ccc;
+    padding: 20px;
+    background-color: #fff;
+  } */
+
+  .chatbot-loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+  }
   
   h1 {
     text-align: center;
@@ -179,11 +195,12 @@ body {
     cursor: pointer;
   }
   
-  #loader {
+  /* #loader {
     display: none;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-  }
+  } */
   
+ 

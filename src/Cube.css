@@ -1,70 +1,77 @@
 .square-container {
+  margin-top: 30px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  height: 50vh; 
+  height: 50vh;
   gap: 20px;
 }
 
 .square-item {
-  position: relative; /* Ensure z-index works properly */
-  width: 300px;
-  height: 300px;
+  position: relative;
+  width: 280px; /* Slightly smaller for better spacing */
+  height: 280px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid #f6f6f6;
-  box-shadow: 0 0 10px rgb(221, 108, 108);
-  font-size: 30px;
+  border-radius: 15px; /* Rounded corners */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Soft shadow */
+  font-size: 24px;
   font-weight: bold;
   text-align: center;
   background-size: cover;
   background-position: center;
-  transition: transform 0.2s ease;
-  filter: brightness(0.7); /* Lower brightness initially */
+  transition: transform 0.3s ease, filter 0.3s ease;
+  filter: brightness(0.8); /* Initial brightness */
+  color: white;
+  text-decoration: none; /* Remove underline */
 }
 
 .square-item:hover {
-  transform: scale(1.07); /* Scale up on hover */
-  filter: brightness(1); /* Restore brightness on hover */
+  transform: scale(1.1); /* Slightly larger scale on hover */
+  filter: brightness(1); /* Full brightness on hover */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Stronger shadow on hover */
 }
 
 .square-item::before {
-  content: ''; /* Pseudo-element to overlay background image */
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-size: cover;
-  background-position: center;
-  filter: brightness(0.7); /* Lower brightness for background image */
-  transition: transform 0.2s ease, filter 0.2s ease;
-  z-index: -1; /* Behind the content */
+  border-radius: 15px; /* Ensure background matches the rounded corners */
+  z-index: -1;
 }
 
 .constituencies {
-  background-color: rgb(215, 72, 72);
-  color: rgb(255, 255, 255);
+  background: linear-gradient(135deg, #ff7e5f, #feb47b); /* Gradient background */
 }
 
 .candidates {
-  background-image: url('./Assets/bg3.png');
-  color: rgb(255, 255, 255);
+  background: linear-gradient(135deg, #43cea2, #185a9d); /* Gradient background */
 }
 
 .voter-registration {
-  background-color: rgb(215, 72, 72); /* Medium sea green */
-  color: white;
+  background: linear-gradient(135deg, #f857a6, #ff5858); /* Gradient background */
 }
 
 .election-updates {
-  background-color: rgb(215, 72, 72);
-  color: white;
+  background: linear-gradient(135deg, #4ca1af, #c4e0e5); /* Gradient background */
 }
 
 .loksabha2024 {
-  background-color: rgb(215, 72, 72);
-  color: white;
+  background: linear-gradient(135deg, #ff512f, #dd2476); /* Gradient background */
 }
+
+/* Additional CSS to ensure links have no underline */
+a.square-item {
+  text-decoration: none; /* Remove underline */
+}
+
+a.square-item:hover {
+  text-decoration: none; /* Ensure no underline on hover */
+}
+
+

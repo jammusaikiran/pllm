@@ -1,20 +1,34 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, CartesianGrid } from 'recharts';
+import Loader from './Loader';
+import './Cube.css';
 
 const Container = styled.div`
   width: 80%; /* Adjust the width as needed */
-  margin: 0 auto; /* Center the container */
+  margin: 0 auto;
+  height:30px;
+  padding-top:2px; /* Center the container */
 `;
 
 const Form = styled.form`
   margin-bottom: 20px;
+  width:500px;
+  height:30px;
+  text-align:centre;
+
 `;
 
 const Input = styled.input`
-  margin-right: 10px;
+  width: 50px; /* Decreased the width */
+  padding-bottom: 15px; /* Adjusted the padding */
+  
+  margin-top: 20px;
+ 
 `;
+
+// const 
 
 const SentimentBarGraph = () => {
   const [tweetInput, setTweetInput] = useState('');
@@ -72,21 +86,22 @@ const SentimentBarGraph = () => {
           onChange={handleInputChange}
           placeholder="Enter your tweet"
         />
-        <button type="submit">Add Tweet</button>
+        <button type="submit" style={{height:30,marginTop:20}}>Add Tweet</button>
       </Form>
 
       {isLoading ? (
-        <div>Loading...</div>
+        <Loader />
       ) : (
-        <ResponsiveContainer width="100%" height={300}> {/* Adjust the height as needed */}
-          <BarChart data={chartData}>
+        <ResponsiveContainer width="100%" height={400}> {/* Adjust the height as needed */}
+          <BarChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
+            <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="name" />
             <YAxis />
             <Tooltip />
             <Legend />
-            <Bar dataKey="positive" fill="#75C1C1" />
-            <Bar dataKey="neutral" fill="#999" />
-            <Bar dataKey="negative" fill="#FF6384" />
+            <Bar dataKey="positive" fill="#75C1C1" barSize={20} />
+            <Bar dataKey="neutral" fill="#999" barSize={20} />
+            <Bar dataKey="negative" fill="#FF6384" barSize={20} />
           </BarChart>
         </ResponsiveContainer>
       )}

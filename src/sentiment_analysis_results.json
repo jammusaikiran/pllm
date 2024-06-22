@@ -1,0 +1,62 @@
+[
+    {
+        "name": "BJP",
+        "positive": 112,
+        "neutral": 131,
+        "negative": 52
+    },
+    {
+        "name": "Congress",
+        "positive": 63,
+        "neutral": 71,
+        "negative": 25
+    },
+    {
+        "name": "AAP",
+        "positive": 6,
+        "neutral": 10,
+        "negative": 5
+    },
+    {
+        "name": "TMC",
+        "positive": 14,
+        "neutral": 8,
+        "negative": 2
+    },
+    {
+        "name": "SP",
+        "positive": 61,
+        "neutral": 96,
+        "negative": 28
+    },
+    {
+        "name": "BSP",
+        "positive": 7,
+        "neutral": 2,
+        "negative": 1
+    },
+    {
+        "name": "ShivSena",
+        "positive": 0,
+        "neutral": 5,
+        "negative": 0
+    },
+    {
+        "name": "NCP",
+        "positive": 1,
+        "neutral": 4,
+        "negative": 3
+    },
+    {
+        "name": "RJD",
+        "positive": 1,
+        "neutral": 7,
+        "negative": 0
+    },
+    {
+        "name": "JD(U)",
+        "positive": 3,
+        "neutral": 4,
+        "negative": 0
+    }
+]

@@ -51,11 +51,12 @@ def update_sentiments():
         })
 
     # Convert to JSON string
-    json_string = json.dumps(data)
+    json_string = json.dumps(data, indent=4)
 
     # Save the JSON string to a file
-    json_path = r'C:\Users\ridhi\OneDrive\Documents\Desktop\Dummy\model\src\sentiment_analysis_results.json'
+    json_path = r'C:\Users\jammu\OneDrive\PROJECT-SCHOOL\FinalPro\PshelogistLLM\pllm\src\sentiment_analysis_results.json'
     try:
+        os.makedirs(os.path.dirname(json_path), exist_ok=True)
         with open(json_path, 'w') as f:
             f.write(json_string)
         print(f"Sentiment analysis completed. Results saved to {json_path}.")
@@ -87,11 +88,14 @@ def add_tweets_endpoint():
 def get_sentiment_data():
     json_path = r'C:\Users\jammu\OneDrive\PROJECT-SCHOOL\FinalPro\PshelogistLLM\pllm\src\sentiment_analysis_results.json'
     if os.path.exists(json_path):
-        with open(json_path, 'r') as f:
-            data = json.load(f)
-        return jsonify(data)
+        try:
+            with open(json_path, 'r') as f:
+                data = json.load(f)
+            return jsonify(data)
+        except Exception as e:
+            return jsonify({'error': str(e)}), 500
     else:
-        return jsonify([])
+        return jsonify([]), 404
 
 if __name__ == '__main__':
     app.run(debug=True)

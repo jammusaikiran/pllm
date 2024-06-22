@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './NavBar.css';
+import Loader from './Loader';
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -47,6 +48,7 @@ const NavBar = () => {
         ...chatHistory,
         { type: 'user', message: userMessage },
         { type: 'bot', message: botMessage },
+        
       ]);
     } catch (error) {
       console.error('Error:', error);
@@ -83,9 +85,7 @@ const NavBar = () => {
         </div>
 
       </nav>
-      <div className='marquee'>
-          <marquee>Unlock the power of data-driven insights with our psephology expertise – your go-to source for accurate election analysis and voter behavior predictions.</marquee>
-        </div>
+      
       {isChatOpen && (
         <div id="chat-container">
           <h1>Chatbot</h1>
@@ -109,9 +109,8 @@ const NavBar = () => {
             <button type="submit" disabled={loading}>Send</button>
           </form>
           {loading && (
-            <div id="loader">
-              <img src="./public/loader.gif" width="150px" alt="Loading..." />
-            </div>
+            
+            <div className='chatbot-loader'></div>
           )}
         </div>
       )}
