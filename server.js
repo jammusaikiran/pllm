@@ -60,7 +60,6 @@ async function runChat(userInput) {
         role: "model",
         parts: [{ text: "Elections are formal processes where citizens cast their votes to choose representatives or decide on specific issues within a government or organization. They serve as a fundamental mechanism for democratic governance, allowing for the peaceful transfer of power and the expression of the public will."}],
       },
-
       {
         role: "user",
         parts: [{ text: "What is football?"}],
@@ -93,8 +92,6 @@ app.get('/loader.gif', (req, res) => {
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/public/index.html');  // Corrected path to index.html
 });
-
-
 
 app.post('/chat', async (req, res) => {
   try {

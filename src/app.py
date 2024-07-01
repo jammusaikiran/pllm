@@ -4,6 +4,11 @@ from textblob import TextBlob
 import json
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from io import BytesIO
+from PIL import Image
+import base64
+from langchain_core.messages import HumanMessage
+from langchain_google_genai import ChatGoogleGenerativeAI
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
@@ -97,5 +102,38 @@ def get_sentiment_data():
     else:
         return jsonify([]), 404
 
+# Your Google API key
+google_api_key = "AIzaSyBEShS6L-BvBx0WZ78vg_qTO_aQ3z3pwlQ"
+
+llm = ChatGoogleGenerativeAI(model="gemini-pro-vision", google_api_key=google_api_key)
+
+# Function to convert image file to base64 string
+def image_to_base64(image_file):
+    buffered = BytesIO()
+    image = Image.open(image_file)
+    image.save(buffered, format="PNG")
+    return base64.b64encode(buffered.getvalue()).decode()
+
+@app.route('/upload', methods=['POST'])
+def upload_image():
+    if 'image' not in request.files:
+        return jsonify({"error": "No image file provided"}), 400
+    
+    image_file = request.files['image']
+    image_base64 = image_to_base64(image_file)
+    
+    message = HumanMessage(
+        content=[
+            {
+                "type": "text",
+                "text": "describe the name of the political party shown in the image,describe in detail about the party like the founder,ruled years in government",
+            },
+            {"type": "image_base64", "image_base64": image_base64},
+        ]
+    )
+    
+    result = llm.invoke([message])
+    return jsonify(result)
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=5000)

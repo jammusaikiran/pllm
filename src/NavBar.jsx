@@ -67,7 +67,7 @@ const NavBar = () => {
       <nav className="navbar">
         <div className="navbar-container">
           <div className="navbar-logo">
-            <a href="/">MyLogo</a>
+            <a href="/">P-LLM</a>
           </div>
           <div className={`navbar-menu ${isOpen ? 'active' : ''}`}>
             <a href="/" className="nav-item">Home</a>

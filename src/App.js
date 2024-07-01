@@ -5,6 +5,8 @@ import Home from './Home';
 import SearchByName from './SearchByName';
 import SearchByConst from './SearchByConst';
 import SentimentBarGraph from './SentimentBarGraph';
+import PartyRecognition from './PartyRecognition';
+import Footer from './Footer';
 function App() {
   const [isChatOpen, setIsChatOpen] = useState(false);
 
@@ -25,8 +27,10 @@ function App() {
           <Route path="/searchbyname" element={<SearchByName />} />
           <Route path="/searchbyconst" element={<SearchByConst />} />
           <Route path="/sentimentanalysis" element={<SentimentBarGraph/>}/>
+          <Route path="/upload" element={<PartyRecognition/>}/>
 
         </Routes>
+        {/* <Footer/> */}
         {/* Add your Chatbot component here if necessary */}
       </div>
     </Router>

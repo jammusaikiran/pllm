@@ -1,13 +1,13 @@
 [
     {
         "name": "BJP",
-        "positive": 112,
-        "neutral": 131,
+        "positive": 113,
+        "neutral": 132,
         "negative": 52
     },
     {
         "name": "Congress",
-        "positive": 63,
+        "positive": 64,
         "neutral": 71,
         "negative": 25
     },
