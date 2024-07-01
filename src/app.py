@@ -14,7 +14,7 @@ app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
 # Absolute path to the CSV file
-csv_path = r'C:\Users\jammu\OneDrive\PROJECT-SCHOOL\FinalPro\PshelogistLLM\pllm\public\LokSabha_Election_2024_Tweets updated.csv'
+csv_path = r'C:\Users\Dell\Desktop\Project\pllm\public\LokSabha_Election_2024_Tweets updated.csv'
 
 # Check if the CSV file exists
 if not os.path.exists(csv_path):
@@ -59,7 +59,7 @@ def update_sentiments():
     json_string = json.dumps(data, indent=4)
 
     # Save the JSON string to a file
-    json_path = r'C:\Users\jammu\OneDrive\PROJECT-SCHOOL\FinalPro\PshelogistLLM\pllm\src\sentiment_analysis_results.json'
+    json_path = r'C:\Users\Dell\Desktop\Project\pllm\src\sentiment_analysis_results.json'
     try:
         os.makedirs(os.path.dirname(json_path), exist_ok=True)
         with open(json_path, 'w') as f:
@@ -91,7 +91,7 @@ def add_tweets_endpoint():
 
 @app.route('/get_sentiment_data', methods=['GET'])
 def get_sentiment_data():
-    json_path = r'C:\Users\jammu\OneDrive\PROJECT-SCHOOL\FinalPro\PshelogistLLM\pllm\src\sentiment_analysis_results.json'
+    json_path = r'C:\Users\Dell\Desktop\Project\pllm\src\sentiment_analysis_results.json'
     if os.path.exists(json_path):
         try:
             with open(json_path, 'r') as f:
