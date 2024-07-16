@@ -30,6 +30,7 @@
   border-radius: 4px;
   width: 100%;
   transition: background-color 0.3s;
+  margin-top: 50px;
 }
 
 .button:hover {
@@ -62,6 +63,7 @@
   justify-content: center;
   align-items: center;
   position: relative;
+  margin-top: 50px;
 }
 
 .partyDetails {

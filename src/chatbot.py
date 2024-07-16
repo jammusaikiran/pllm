@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-import main  # Replace with your actual script name
+import rag  # Replace with your actual script name
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes in your Flask app
@@ -11,7 +11,7 @@ def chatbot():
     data = request.get_json()
     query = data['query']
     print(f"Received query: {query}")
-    response = main.generate_response(query)
+    response = rag.generate_response(query)
     print(f"Generated response: {response}")
     return jsonify(response=response)
 
