@@ -31,7 +31,7 @@ async function runChat(userInput) {
     },
     // ... other safety settings
   ];
-
+  
   const chat = model.startChat({
     generationConfig,
     safetySettings,

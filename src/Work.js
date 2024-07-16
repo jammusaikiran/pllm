@@ -7,7 +7,7 @@ const Work = () => {
 
   return (
     <div className="square-container">
-      <div className="square-item loksabha2024">---------</div>
+      <div className="square-item loksabha2024" onClick={() => navigate('/partieslist')}>Know More About Parties</div>
       <div className="square-item constituencies" onClick={() => navigate('/searchbyconst')}>Constituencies</div>
       <div className="square-item candidates" onClick={() => navigate('/searchbyname')}>Candidates Details</div>
       <div
@@ -15,7 +15,7 @@ const Work = () => {
         onClick={() => navigate('/sentimentanalysis')}>
         Sentimental Analysis of LokSabha2024 Elections
       </div>
-      <div className="square-item election-updates"onClick={() => navigate('/upload')}>Party Symbol Recognition</div>
+      <div className="square-item election-updates" onClick={() => navigate('/upload')}>Party Symbol Recognition</div>
     </div>
   );
 };

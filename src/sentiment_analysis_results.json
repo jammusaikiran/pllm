@@ -1,1 +1,66 @@
+<<<<<<< HEAD
 []
+=======
+[
+    {
+        "name": "BJP",
+        "positive": 111,
+        "neutral": 126,
+        "negative": 51
+    },
+    {
+        "name": "Congress",
+        "positive": 61,
+        "neutral": 69,
+        "negative": 25
+    },
+    {
+        "name": "AAP",
+        "positive": 5,
+        "neutral": 10,
+        "negative": 5
+    },
+    {
+        "name": "TMC",
+        "positive": 12,
+        "neutral": 6,
+        "negative": 0
+    },
+    {
+        "name": "SP",
+        "positive": 59,
+        "neutral": 94,
+        "negative": 27
+    },
+    {
+        "name": "BSP",
+        "positive": 6,
+        "neutral": 1,
+        "negative": 0
+    },
+    {
+        "name": "ShivSena",
+        "positive": 0,
+        "neutral": 4,
+        "negative": 0
+    },
+    {
+        "name": "NCP",
+        "positive": 1,
+        "neutral": 4,
+        "negative": 2
+    },
+    {
+        "name": "RJD",
+        "positive": 1,
+        "neutral": 7,
+        "negative": 0
+    },
+    {
+        "name": "JD(U)",
+        "positive": 3,
+        "neutral": 4,
+        "negative": 0
+    }
+]
+>>>>>>> 376b05cfe85305b10af04a3a4a5de1abb947aec1
