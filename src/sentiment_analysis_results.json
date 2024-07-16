@@ -1,62 +1,62 @@
 [
     {
         "name": "BJP",
-        "positive": 111,
-        "neutral": 126,
-        "negative": 51
+        "positive": 1,
+        "neutral": 0,
+        "negative": 0
     },
     {
         "name": "Congress",
-        "positive": 61,
-        "neutral": 69,
-        "negative": 25
+        "positive": 0,
+        "neutral": 0,
+        "negative": 0
     },
     {
         "name": "AAP",
-        "positive": 5,
-        "neutral": 10,
-        "negative": 5
+        "positive": 0,
+        "neutral": 0,
+        "negative": 0
     },
     {
         "name": "TMC",
-        "positive": 12,
-        "neutral": 6,
+        "positive": 0,
+        "neutral": 0,
         "negative": 0
     },
     {
         "name": "SP",
-        "positive": 59,
-        "neutral": 94,
-        "negative": 27
+        "positive": 0,
+        "neutral": 0,
+        "negative": 1
     },
     {
         "name": "BSP",
-        "positive": 6,
-        "neutral": 1,
-        "negative": 0
+        "positive": 0,
+        "neutral": 0,
+        "negative": 1
     },
     {
         "name": "ShivSena",
         "positive": 0,
-        "neutral": 4,
+        "neutral": 0,
         "negative": 0
     },
     {
         "name": "NCP",
-        "positive": 1,
-        "neutral": 4,
-        "negative": 2
+        "positive": 0,
+        "neutral": 0,
+        "negative": 0
     },
     {
         "name": "RJD",
-        "positive": 1,
-        "neutral": 7,
+        "positive": 0,
+        "neutral": 0,
         "negative": 0
     },
     {
         "name": "JD(U)",
-        "positive": 3,
-        "neutral": 4,
+        "positive": 0,
+        "neutral": 0,
         "negative": 0
     }
 ]
