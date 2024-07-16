@@ -70,6 +70,12 @@ const PartyInFavor = styled.h3`
   margin-top: 20px;
 `;
 
+const ErrorMessage = styled.p`
+  text-align: center;
+  color: red;
+  margin-top: 20px;
+`;
+
 const SentimentBarGraph = () => {
   const [tweetInput, setTweetInput] = useState('');
   const [chartData, setChartData] = useState([]);
@@ -77,6 +83,7 @@ const SentimentBarGraph = () => {
   const [positivePieData, setPositivePieData] = useState([]);
   const [negativePieData, setNegativePieData] = useState([]);
   const [partyInFavour, setPartyInFavour] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleInputChange = useCallback((event) => {
     setTweetInput(event.target.value);
@@ -88,6 +95,7 @@ const SentimentBarGraph = () => {
 
     try {
       setIsLoading(true);
+      setErrorMessage('');
       const response = await axios.post('http://127.0.0.1:5000/add_tweets', {
         tweets: [tweetInput],
       });
@@ -98,6 +106,11 @@ const SentimentBarGraph = () => {
         console.log("Successfully added");
       }
     } catch (error) {
+      if (error.response && error.response.data && error.response.data.error) {
+        setErrorMessage(error.response.data.error);
+      } else {
+        setErrorMessage('Error adding tweet. Please try again later.');
+      }
       console.error('Error adding tweet:', error);
     } finally {
       setIsLoading(false);
@@ -153,6 +166,8 @@ const SentimentBarGraph = () => {
         />
         <Button type="submit">Add Tweet</Button>
       </Form>
+
+      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
 
       {isLoading ? (
         <Loader />

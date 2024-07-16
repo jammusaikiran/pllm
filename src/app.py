@@ -4,17 +4,12 @@ from textblob import TextBlob
 import json
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from io import BytesIO
-from PIL import Image
-import base64
-from langchain_core.messages import HumanMessage
-from langchain_google_genai import ChatGoogleGenerativeAI
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
 # Absolute path to the CSV file
-csv_path = r'C:\Users\Dell\Desktop\Project\pllm\public\LokSabha_Election_2024_Tweets updated.csv'
+csv_path = r'C:\Users\ridhi\OneDrive\Documents\Desktop\Psephology ORIGINAL\pllm\public\test.csv'
 
 # Check if the CSV file exists
 if not os.path.exists(csv_path):
@@ -59,7 +54,7 @@ def update_sentiments():
     json_string = json.dumps(data, indent=4)
 
     # Save the JSON string to a file
-    json_path = r'C:\Users\Dell\Desktop\Project\pllm\src\sentiment_analysis_results.json'
+    json_path = r'C:\Users\ridhi\OneDrive\Documents\Desktop\Psephology ORIGINAL\pllm\src\sentiment_analysis_results.json'
     try:
         os.makedirs(os.path.dirname(json_path), exist_ok=True)
         with open(json_path, 'w') as f:
@@ -75,7 +70,7 @@ def add_tweets(new_tweets):
     df = pd.concat([df, new_df], ignore_index=True)
 
     # Save the updated DataFrame to CSV
-    df.to_csv(csv_path, index=False)
+    # df.to_csv(csv_path, index=False)
 
     # Update sentiments after adding new tweets
     update_sentiments()
@@ -84,14 +79,20 @@ def add_tweets(new_tweets):
 def add_tweets_endpoint():
     if not request.json or 'tweets' not in request.json:
         return jsonify({'error': 'No tweets provided'}), 400
-    
+
     new_tweets = request.json['tweets']
-    add_tweets(new_tweets)
+
+    # Check for relevant party mentions
+    relevant_tweets = [tweet for tweet in new_tweets if any(party.lower() in tweet.lower() for party in parties)]
+    if not relevant_tweets:
+        return jsonify({'error': 'Only election party tweets are accepted. Please submit tweets related to election parties.'}), 400
+
+    add_tweets(relevant_tweets)
     return jsonify({'message': 'Tweets added successfully'}), 200
 
 @app.route('/get_sentiment_data', methods=['GET'])
 def get_sentiment_data():
-    json_path = r'C:\Users\Dell\Desktop\Project\pllm\src\sentiment_analysis_results.json'
+    json_path = r'C:\Users\ridhi\OneDrive\Documents\Desktop\Psephology ORIGINAL\pllm\src\sentiment_analysis_results.json'
     if os.path.exists(json_path):
         try:
             with open(json_path, 'r') as f:
@@ -102,38 +103,16 @@ def get_sentiment_data():
     else:
         return jsonify([]), 404
 
-# Your Google API key
-google_api_key = "AIzaSyBEShS6L-BvBx0WZ78vg_qTO_aQ3z3pwlQ"
-
-llm = ChatGoogleGenerativeAI(model="gemini-pro-vision", google_api_key=google_api_key)
-
-# Function to convert image file to base64 string
-def image_to_base64(image_file):
-    buffered = BytesIO()
-    image = Image.open(image_file)
-    image.save(buffered, format="PNG")
-    return base64.b64encode(buffered.getvalue()).decode()
-
-@app.route('/upload', methods=['POST'])
-def upload_image():
-    if 'image' not in request.files:
-        return jsonify({"error": "No image file provided"}), 400
-    
-    image_file = request.files['image']
-    image_base64 = image_to_base64(image_file)
-    
-    message = HumanMessage(
-        content=[
-            {
-                "type": "text",
-                "text": "describe the name of the political party shown in the image,describe in detail about the party like the founder,ruled years in government",
-            },
-            {"type": "image_base64", "image_base64": image_base64},
-        ]
-    )
-    
-    result = llm.invoke([message])
-    return jsonify(result)
+def clear_sentiment_data():
+    json_path = r'C:\Users\ridhi\OneDrive\Documents\Desktop\Psephology ORIGINAL\pllm\src\sentiment_analysis_results.json'
+    try:
+        os.makedirs(os.path.dirname(json_path), exist_ok=True)
+        with open(json_path, 'w') as f:
+            f.write('[]')
+        print(f"Sentiment data cleared in {json_path}.")
+    except Exception as e:
+        print(f"Error clearing sentiment data: {str(e)}")
 
 if __name__ == '__main__':
+    clear_sentiment_data()  # Clear the sentiment data when the server starts
     app.run(debug=True, host='0.0.0.0', port=5000)
