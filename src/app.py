@@ -10,15 +10,26 @@ import base64
 from langchain_core.messages import HumanMessage
 from langchain_google_genai import ChatGoogleGenerativeAI
 
+
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+import os
+from langchain_core.messages import HumanMessage
+from langchain_google_genai import ChatGoogleGenerativeAI
+
+
+
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
 # Absolute path to the CSV file
-csv_path = r'C:\Users\Dell\Desktop\Project\pllm\public\LokSabha_Election_2024_Tweets updated.csv'
+csv_path = r'C:\Users\jammu\OneDrive\PROJECT-SCHOOL\FinalPro\PshelogistLLM\pllm\public\LokSabha_Election_2024_Tweets updated.csv'
 
 # Check if the CSV file exists
 if not os.path.exists(csv_path):
     raise FileNotFoundError(f"CSV file not found at path: {csv_path}")
+
+
 
 # Load the dataset
 df = pd.read_csv(csv_path)
@@ -59,7 +70,7 @@ def update_sentiments():
     json_string = json.dumps(data, indent=4)
 
     # Save the JSON string to a file
-    json_path = r'C:\Users\Dell\Desktop\Project\pllm\src\sentiment_analysis_results.json'
+    json_path = r'C:\Users\jammu\OneDrive\PROJECT-SCHOOL\FinalPro\PshelogistLLM\pllm\src\sentiment_analysis_results.json'
     try:
         os.makedirs(os.path.dirname(json_path), exist_ok=True)
         with open(json_path, 'w') as f:
@@ -67,6 +78,8 @@ def update_sentiments():
         print(f"Sentiment analysis completed. Results saved to {json_path}.")
     except Exception as e:
         print(f"Error saving sentiment analysis results: {str(e)}")
+
+
 
 def add_tweets(new_tweets):
     global df
@@ -91,7 +104,7 @@ def add_tweets_endpoint():
 
 @app.route('/get_sentiment_data', methods=['GET'])
 def get_sentiment_data():
-    json_path = r'C:\Users\Dell\Desktop\Project\pllm\src\sentiment_analysis_results.json'
+    json_path = r'C:\Users\jammu\OneDrive\PROJECT-SCHOOL\FinalPro\PshelogistLLM\pllm\src\sentiment_analysis_results.json'
     if os.path.exists(json_path):
         try:
             with open(json_path, 'r') as f:
@@ -102,38 +115,128 @@ def get_sentiment_data():
     else:
         return jsonify([]), 404
 
-# Your Google API key
-google_api_key = "AIzaSyBEShS6L-BvBx0WZ78vg_qTO_aQ3z3pwlQ"
 
-llm = ChatGoogleGenerativeAI(model="gemini-pro-vision", google_api_key=google_api_key)
 
-# Function to convert image file to base64 string
-def image_to_base64(image_file):
-    buffered = BytesIO()
-    image = Image.open(image_file)
-    image.save(buffered, format="PNG")
-    return base64.b64encode(buffered.getvalue()).decode()
+
+
+
+
+
+
+
+
+
+# CORS(app)
+# app.config['UPLOAD_FOLDER'] = 'uploads'
+# app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg', 'gif'}
+
+# key = "AIzaSyBEShS6L-BvBx0WZ78vg_qTO_aQ3z3pwlQ"
+# llm = ChatGoogleGenerativeAI(model="gemini-pro-vision", google_api_key=key)
+
+# def allowed_file(filename):
+#     return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
+
+# @app.route('/upload', methods=['POST'])
+# def upload_image():
+#     print("hello*******")
+#     if 'file' not in request.files:
+#         return jsonify({'error': 'No file part'}), 400
+
+#     file = request.files['file']
+
+#     if file.filename == '':
+#         return jsonify({'error': 'No selected file'}), 400
+
+#     if file and allowed_file(file.filename):
+#         filename = file.filename
+#         filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+#         file.save(filepath)
+
+#         image_url = filepath
+
+#         message = HumanMessage(
+#             content=[
+#                 {
+#                     "type": "text",
+#                     # "text": "describe the name of the political party shown in the image,describe in detail about the party like the founder,ruled years in government",
+                
+#                     "text":"Please provide the following detailed information about the political party shown in the image:Party NameFounderYear of EstablishmentYears in PowerNumber of Sitting Legislative MembersNumber of Parliamentary MembersPopular Schemes ImplementedCurrent Ministers from the PartyEnsure the information is well-organized with appropriate headings and subheadings."                
+#                 },
+#                 {"type": "image_url", "image_url": image_url},
+#             ]
+#         )
+#         result = llm.invoke([message])
+#         return jsonify({'result': result.content})
+
+#     return jsonify({'error': 'File not allowed'}), 400
+
+
+
+
+
+
+CORS(app)
+app.config['UPLOAD_FOLDER'] = 'uploads'
+app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg', 'gif'}
+
+key = "AIzaSyBEShS6L-BvBx0WZ78vg_qTO_aQ3z3pwlQ"
+llm = ChatGoogleGenerativeAI(model="gemini-pro-vision", google_api_key=key)
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
 
 @app.route('/upload', methods=['POST'])
 def upload_image():
-    if 'image' not in request.files:
-        return jsonify({"error": "No image file provided"}), 400
-    
-    image_file = request.files['image']
-    image_base64 = image_to_base64(image_file)
-    
-    message = HumanMessage(
-        content=[
-            {
-                "type": "text",
-                "text": "describe the name of the political party shown in the image,describe in detail about the party like the founder,ruled years in government",
-            },
-            {"type": "image_base64", "image_base64": image_base64},
-        ]
-    )
-    
-    result = llm.invoke([message])
-    return jsonify(result)
+    print("hllo*********")
+    if 'file' not in request.files:
+        return jsonify({'error': 'No file part'}), 400
+
+    file = request.files['file']
+
+    if file.filename == '':
+        return jsonify({'error': 'No selected file'}), 400
+
+    if file and allowed_file(file.filename):
+        try:
+            filename = file.filename
+            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            file.save(filepath)
+
+            image_url = filepath
+
+            message = HumanMessage(
+                content=[
+                    {
+                        "type": "text",
+                        # "text": "Please provide the following detailed information about the political party shown in the image: Party Name, Founder, Year of Establishment, Years in Power, Number of Sitting Legislative Members, Number of Parliamentary Members, Popular Schemes Implemented, Current Ministers from the Party. Ensure the information is well-organized with appropriate headings and subheadings.If the image does not contain any information about the Indian political parties return It is not a political party in India"
+                        "text":"Please extract and provide comprehensive details about the political party depicted in the image, including: Party Name, Founder, Year of Establishment, Years in Power, Number of Sitting Legislative Members, Number of Parliamentary Members, Popular Schemes Implemented, and Current Ministers from the Party. Ensure the information is well-organized with clear headings and subheadings for each section. If the provided image does not contain information related to  political parties and if the party doesnot belongs to india then output should be Not a indian party, output: 'It is not an Indian political party."
+
+
+
+
+
+
+                    },
+                    {"type": "image_url", "image_url": image_url},
+                ]
+            )
+            result = llm.invoke([message])
+
+            # Format result into a structured list
+            output_list = result.content.strip().split('\n')
+
+            return jsonify({'result': output_list})
+
+        except Exception as e:
+            print(f"Error processing file: {e}")
+            return jsonify({'error': 'Error processing file'}), 500
+
+    return jsonify({'error': 'File format not supported'}), 400
+
+
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
