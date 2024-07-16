@@ -33,12 +33,12 @@ const NavBar = () => {
 
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:3000/chat', {  // Updated URL
+      const response = await fetch('http://localhost:8000/api/chatbot', {  // Updated URL
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ userInput: userMessage }),
+        body: JSON.stringify({ query: userMessage }),
       });
 
       const data = await response.json();
