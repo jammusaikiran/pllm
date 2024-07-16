@@ -5,8 +5,10 @@ import Home from './Home';
 import SearchByName from './SearchByName';
 import SearchByConst from './SearchByConst';
 import SentimentBarGraph from './SentimentBarGraph';
-import PartyRecognition from './PartyRecognition';
+// import PartyRecognition from './PartyRecognition';
 import Footer from './Footer';
+import NationalParties from './NationalParties';
+import ImageUpload from './upload';
 function App() {
   const [isChatOpen, setIsChatOpen] = useState(false);
 
@@ -27,7 +29,9 @@ function App() {
           <Route path="/searchbyname" element={<SearchByName />} />
           <Route path="/searchbyconst" element={<SearchByConst />} />
           <Route path="/sentimentanalysis" element={<SentimentBarGraph/>}/>
-          <Route path="/upload" element={<PartyRecognition/>}/>
+          
+          <Route path="/partieslist" element={<NationalParties/>}/>
+          <Route path="/upload" element={<ImageUpload/>}/>
 
         </Routes>
         {/* <Footer/> */}
