@@ -121,7 +121,7 @@ app.config['UPLOAD_FOLDER'] = 'uploads'
 app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg', 'gif'}
 
 key = "AIzaSyBEShS6L-BvBx0WZ78vg_qTO_aQ3z3pwlQ"
-llm = ChatGoogleGenerativeAI(model="gemini-pro-vision", google_api_key=key)
+llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", google_api_key=key)
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
